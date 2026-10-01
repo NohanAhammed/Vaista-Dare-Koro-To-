@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#08080b">
+<title>Vaista Dare Koro To?</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --bg:#08080b;
+  --bg2:#0d0d12;
+  --card:rgba(255,255,255,.055);
+  --card2:rgba(255,255,255,.085);
+  --line:rgba(255,255,255,.11);
+  --line2:rgba(255,255,255,.22);
+  --text:#f1eff3;
+  --muted:#99959f;
+  --purple:#75558e;
+  --purple2:#a487b9;
+  --whiteGlow:rgba(255,255,255,.22);
+  --danger:#8e6870;
+  --radius:24px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  min-height:100dvh;
+  background:
+    radial-gradient(circle at 92% 2%,rgba(132,72,180,.34),transparent 32%),
+    radial-gradient(circle at 4% 82%,rgba(91,45,135,.20),transparent 30%),
+    radial-gradient(circle at 78% 100%,rgba(105,55,150,.12),transparent 28%),
+    linear-gradient(145deg,#050507 0%,#0b0710 48%,#07070a 100%);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+
+button,input{font:inherit}
+button{color:inherit;border:0;background:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+.app{
+  width:min(100%,680px);
+  margin:auto;
+  min-height:100dvh;
+  padding:0 16px 105px;
+}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  z-index:30;
+  margin:0 -16px;
+  padding:14px 16px 12px;
+  background:rgba(8,8,11,.72);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.045);
+}
+
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.025));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+.brand-mark svg{
+  width:20px;
+  height:20px;
+  fill:none;
+  stroke:var(--text);
+  stroke-width:1.6;
+}
+
+.brand-name{
+  font-size:17px;
+  font-weight:760;
+  letter-spacing:-.3px;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:1px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.035);
+  transition:.25s ease;
+}
+
+.icon-btn:hover,
+.icon-btn:active{
+  border-color:var(--line2);
+  background:rgba(255,255,255,.09);
+  box-shadow:0 0 18px var(--whiteGlow),0 0 35px rgba(255,255,255,.055);
+}
+
+.icon{
+  width:19px;
+  height:19px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* PAGES */
+.page{
+  display:none;
+  animation:pageIn .28s ease;
+}
+
+.page.active{display:block}
+
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+
+/* GLOSSY BRAND VECTOR */
+.brand-mark{position:relative;overflow:hidden;background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.32),transparent 28%),linear-gradient(145deg,rgba(117,85,142,.34),rgba(255,255,255,.055) 52%,rgba(117,85,142,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 0 20px rgba(164,135,185,.16)}
+.brand-mark::after{content:"";position:absolute;inset:-35% -65%;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.24) 49%,transparent 56%);transform:rotate(10deg);animation:logoShine 4.8s ease-in-out infinite;pointer-events:none}
+.glossy-logo{width:29px;height:29px;position:relative;z-index:1;overflow:visible;filter:drop-shadow(0 3px 7px rgba(117,85,142,.48))}
+.school-cover-logo .glossy-logo{width:68px;height:68px}
+@keyframes logoShine{0%,58%{transform:translateX(-55%) rotate(10deg);opacity:0}66%{opacity:1}80%,100%{transform:translateX(55%) rotate(10deg);opacity:0}}
+.hero h1.bangla-heading,.challenge-text.bangla-question{font-family:"Noto Sans Bengali",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-weight:800;letter-spacing:-1.05px}
+.challenge-text.bangla-question{line-height:1.72;font-size:clamp(19px,5.2vw,25px)}
+.challenge-keyword{color:var(--purple2);text-shadow:0 0 16px rgba(164,135,185,.22)}
+.brand-name .vaista-word,.game-title .vaista-word{color:#f1eff3}
+.brand-name .dare-word,.game-title .dare-word{color:#a487b9}
+.hero h1.bangla-heading{direction:ltr;text-align:left;color:#f1eff3}
+.hero h1.bangla-heading .vaista-word{color:#a487b9}
+
+.brand-mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+}
+
+.school-cover-logo{
+  position:absolute;
+  right:24px;
+  top:24px;
+  width:92px;
+  height:92px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.035);
+  box-shadow:0 0 28px rgba(255,255,255,.10);
+  opacity:.96;
+}
+
+.school-cover-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+
+
+
+.hero h1.bangla-heading{
+  font-family:"Noto Sans Arabic","Noto Sans Bengali",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:800;
+  letter-spacing:-1.8px;
+  line-height:1.18;
+  font-size:clamp(30px,8.2vw,50px);
+  max-width:620px;
+}
+.hero h1.bangla-heading span{
+  font-family:inherit;
+  color:#aaa5ae;
+}
+
+/* HERO */
+.hero{
+  padding:30px 2px 20px;
+}
+
+.eyebrow{
+  color:var(--purple2);
+  font-size:11px;
+  letter-spacing:2.2px;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-size:clamp(34px,9vw,55px);
+  line-height:.98;
+  letter-spacing:-2.5px;
+  max-width:580px;
+}
+
+.hero h1 span{
+  color:#aaa5ae;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:14px;
+  max-width:520px;
+  margin-top:15px;
+}
+
+/* SCHOOL PHOTO / FEATURE */
+.school-cover{
+  min-height:235px;
+  border-radius:30px;
+  border:1px solid var(--line);
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(145deg,rgba(72,47,90,.55),rgba(8,8,11,.86)),
+    linear-gradient(120deg,#33243f,#15131a 55%,#09090c);
+  display:flex;
+  align-items:flex-end;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+
+.school-cover::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top,rgba(0,0,0,.7),transparent 62%),
+    repeating-linear-gradient(90deg,transparent 0 38px,rgba(255,255,255,.018) 39px 40px);
+  pointer-events:none;
+}
+
+.cover-content{
+  position:relative;
+  z-index:1;
+}
+
+.cover-tag{
+  display:inline-flex;
+  padding:7px 10px;
+  border-radius:99px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.055);
+  font-size:10px;
+  color:#d9d5dc;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+}
+
+.cover-title{
+  font-size:29px;
+  font-weight:800;
+  letter-spacing:-1.1px;
+  margin-top:12px;
+}
+
+.cover-sub{
+  color:#aaa6ae;
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* SECTION */
+.section{
+  margin-top:27px;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:13px;
+}
+
+.section-title{
+  font-size:18px;
+  font-weight:750;
+  letter-spacing:-.45px;
+}
+
+.section-note{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* QUICK GRID */
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+}
+
+.card{
+  border:1px solid rgba(164,135,185,.48);
+  background:var(--card);
+  border-radius:var(--radius);
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.card:hover,
+.card:active{
+  background:var(--card2);
+  border-color:rgba(164,135,185,.9);
+  box-shadow:
+    0 0 18px var(--whiteGlow),
+    0 0 42px rgba(255,255,255,.045);
+  transform:translateY(-2px);
+}
+
+.quick-card{
+  min-height:132px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.card-icon{
+  width:39px;
+  height:39px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.20);
+  color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 0 18px rgba(255,255,255,.055);
+}
+.glossy-icon{
+  position:relative;
+  overflow:hidden;
+}
+.glossy-icon::after{
+  content:"";
+  position:absolute;
+  inset:-70% -45%;
+  background:linear-gradient(110deg,transparent 43%,rgba(255,255,255,.48) 49%,transparent 55%);
+  transform:rotate(10deg);
+  animation:iconShine 4.2s ease-in-out infinite;
+  pointer-events:none;
+}
+.glossy-vector{
+  color:#fff;
+  stroke:#fff;
+  filter:drop-shadow(0 2px 5px rgba(255,255,255,.28));
+}
+@keyframes iconShine{
+  0%,55%{transform:translateX(-55%) rotate(10deg);opacity:0}
+  64%{opacity:1}
+  78%,100%{transform:translateX(55%) rotate(10deg);opacity:0}
+}
+.about-box{
+  min-height:88px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  cursor:pointer;
+}
+.about-box-copy{flex:1}
+.about-arrow{color:#fff;opacity:.72}
+.about-section{margin-top:12px;margin-bottom:8px}
+.about-page-card{padding:22px}
+.about-page-card h3{font-size:17px;margin:15px 0 7px}
+.about-page-card p{color:var(--muted);font-size:12px;line-height:1.7}
+
+.card-title{
+  font-weight:700;
+  font-size:14px;
+}
+
+.card-desc{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.stat{
+  padding:17px 12px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:23px;
+  font-weight:800;
+}
+
+.stat-label{
+  font-size:9px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:4px;
+}
+
+/* INNER PAGES */
+.page-top{
+  padding:27px 2px 17px;
+}
+
+.back-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+.back-row button{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.page-heading{
+  font-size:32px;
+  letter-spacing:-1.5px;
+}
+
+.page-description{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+  margin-top:8px;
+}
+
+/* ABOUT */
+.about-card{
+  padding:20px;
+}
+
+.about-card h3{
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.about-card p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* NAV */
+.bottom-nav{
+  position:fixed;
+  z-index:50;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  width:min(430px,calc(100% - 28px));
+  padding:7px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:24px;
+  background:rgba(14,14,18,.76);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:0 16px 45px rgba(0,0,0,.42);
+}
+
+.nav-btn{
+  height:55px;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:4px;
+  color:#77737c;
+  transition:.25s ease;
+}
+
+.nav-btn span{
+  font-size:9px;
+  font-weight:650;
+}
+
+.nav-btn.active{
+  color:#fff;
+  background:rgba(255,255,255,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.nav-btn:hover,
+.nav-btn:active{
+  color:#fff;
+  box-shadow:0 0 18px rgba(255,255,255,.13);
+}
+
+/* DESKTOP */
+@media(min-width:700px){
+  .app{padding-left:24px;padding-right:24px}
+  .header{margin:0 -24px;padding-left:24px;padding-right:24px}
+  .quick-grid{grid-template-columns:repeat(4,1fr)}
+  .school-cover{min-height:300px}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
+/* =====================================================
+   VAISTA DARE KORO TO? — TRUTH & DARE
+===================================================== */
+
+.game-hero{
+  text-align:center;
+  padding:22px 0 18px;
+}
+.game-hero .eyebrow{margin-bottom:8px}
+.game-title{
+  font-size:clamp(31px,8vw,48px);
+  line-height:1;
+  letter-spacing:-2px;
+  font-weight:850;
+}
+.game-title .dare-word{color:#a487b9}
+.game-sub{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:10px;
+  line-height:1.5;
+}
+
+.player-picker{
+  padding:18px;
+  text-align:center;
+}
+.player-count{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  margin-bottom:12px;
+}
+.wheel-wrap{
+  position:relative;
+  width:min(82vw,310px);
+  aspect-ratio:1;
+  margin:4px auto 18px;
+  display:grid;
+  place-items:center;
+}
+.wheel{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  position:relative;
+  border:2px solid rgba(255,255,255,.18);
+  background:
+    conic-gradient(
+      from 0deg,
+      #6b4d80 0deg 45deg,
+      #17131c 45deg 90deg,
+      #85659b 90deg 135deg,
+      #121117 135deg 180deg,
+      #6b4d80 180deg 225deg,
+      #17131c 225deg 270deg,
+      #85659b 270deg 315deg,
+      #121117 315deg 360deg
+    );
+  box-shadow:
+    0 0 35px rgba(117,85,142,.25),
+    inset 0 0 35px rgba(0,0,0,.55);
+  transition:transform 4.2s cubic-bezier(.12,.74,.12,1);
+}
+.wheel::after{
+  content:"";
+  position:absolute;
+  inset:18%;
+  border-radius:50%;
+  background:rgba(8,8,11,.86);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 0 24px rgba(0,0,0,.65);
+}
+.dice-center{width:30px;height:30px;stroke-width:1.55}
+.wheel-center{
+  position:absolute;
+  z-index:4;
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#0d0d12;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 0 24px rgba(255,255,255,.12);
+  font-size:26px;
+}
+.wheel-pointer{
+  position:absolute;
+  z-index:7;
+  top:-5px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-top:22px solid #fff;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.55));
+}
+.wheel-name{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  top:50%;
+  transform-origin:0 0;
+  width:105px;
+  margin-left:-52px;
+  margin-top:-9px;
+  text-align:center;
+  font-size:11px;
+  font-weight:750;
+  color:#fff;
+  text-shadow:0 1px 8px #000;
+  pointer-events:none;
+}
+.spin-btn,.choice-btn,.next-btn{
+  width:100%;
+  min-height:54px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);
+  font-weight:800;
+  letter-spacing:.2px;
+  transition:.22s ease;
+}
+.spin-btn{
+  background:linear-gradient(145deg,#80609a,#5d426f);
+  box-shadow:0 10px 28px rgba(117,85,142,.22);
+}
+.spin-btn:hover,.spin-btn:active{
+  transform:translateY(-2px);
+  box-shadow:0 0 22px rgba(255,255,255,.16),0 12px 32px rgba(117,85,142,.28);
+}
+.spin-btn:disabled{opacity:.45;transform:none}
+.result-card{
+  margin-top:14px;
+  padding:20px;
+  text-align:center;
+  display:none;
+}
+.result-card.show{display:block;animation:pageIn .3s ease}
+.result-label{
+  color:var(--purple2);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+}
+.result-name{
+  font-size:30px;
+  font-weight:850;
+  margin-top:6px;
+}
+.result-hint{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+.choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+.choice-btn{
+  min-height:68px;
+  font-size:16px;
+}
+.truth-btn{
+  background:linear-gradient(145deg,rgba(117,85,142,.28),rgba(117,85,142,.08));
+}
+.dare-btn{
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045));
+}
+.choice-btn:hover,.choice-btn:active{
+  border-color:rgba(255,255,255,.3);
+  box-shadow:0 0 22px rgba(255,255,255,.12);
+  transform:translateY(-2px);
+}
+.challenge-card{
+  margin-top:12px;
+  padding:22px;
+  display:none;
+  text-align:center;
+}
+.challenge-card.show{display:block;animation:pageIn .3s ease}
+.challenge-type{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:2px;
+  color:var(--purple2);
+}
+.challenge-text{
+  font-size:19px;
+  line-height:1.45;
+  font-weight:720;
+  margin-top:10px;
+}
+.next-btn{
+  margin-top:15px;
+  background:rgba(255,255,255,.07);
+}
+.next-btn:hover,.next-btn:active{
+  background:rgba(255,255,255,.12);
+  box-shadow:0 0 20px rgba(255,255,255,.12);
+}
+
+.people-list{display:grid;gap:9px}
+.person-row{
+  padding:14px 15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.person-avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(117,85,142,.18);
+  border:1px solid rgba(164,135,185,.2);
+  font-weight:800;
+}
+.person-name{font-size:14px;font-weight:700;flex:1}
+.remove-person{
+  width:34px;height:34px;border-radius:11px;
+  color:#aaa;
+  border:1px solid var(--line);
+}
+.add-person{
+  display:flex;gap:9px;margin-bottom:12px;
+}
+.add-person input{
+  min-width:0;flex:1;
+  height:48px;padding:0 14px;
+  color:var(--text);
+  background:rgba(255,255,255,.045);
+  border:1px solid var(--line);
+  border-radius:15px;
+  outline:none;
+}
+.add-person input:focus{border-color:var(--line2);box-shadow:0 0 18px rgba(255,255,255,.07)}
+.add-person button{
+  padding:0 17px;border-radius:15px;
+  background:rgba(117,85,142,.3);
+  border:1px solid rgba(164,135,185,.2);
+  font-weight:800;
+}
+.empty-people{
+  padding:25px 16px;text-align:center;color:var(--muted);
+  font-size:12px;line-height:1.5;
+}
+
+@media(max-width:420px){
+  .wheel-wrap{width:78vw}
+  .challenge-text{font-size:17px}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="header-row">
+    <button class="brand" onclick="showPage('home')">
+      <div class="brand-mark" aria-label="Vaista Dare Koro To logo">
+        <svg class="glossy-logo" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="logoG" x1="8" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#d9b8f0"/><stop offset=".72" stop-color="#8e5bb1"/><stop offset="1" stop-color="#5c347b"/></linearGradient><linearGradient id="logoG2" x1="18" y1="12" x2="45" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#c99de7" stop-opacity=".55"/><stop offset="1" stop-color="#6d3d91" stop-opacity=".18"/></linearGradient></defs>
+          <path d="M16 48 28 15c1-3 5-3 7 0l13 33-7 0-3.2-9H25.5l-3.1 9H16Zm12-15h5.7l-2.9-8.7L28 33Z" fill="url(#logoG)"/>
+          <path d="M20 45 29 19c.7-2 3.3-2 4 0l9.5 26" fill="none" stroke="url(#logoG2)" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+          <circle cx="47" cy="18" r="5" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name"><span class="vaista-word">Vaista</span> <span class="dare-word">Dare Koro To?</span></div>
+        <div class="brand-sub">Truth · Dare · Chaos</div>
+      </div>
+    </button>
+  </div>
+</header>
+
+<!-- HOME -->
+<main id="home" class="page active">
+
+  <section class="hero">
+    <div class="eyebrow">FRIEND GROUP GAME</div>
+    <h1 class="bangla-heading" lang="en">Vaiya Koye Lav Ki, Jokhon <span class="vaista-word">Vaista</span> Koite Paren</h1>
+  </section>
+
+
+
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Play</div>
+      <div class="section-note">Pick your chaos</div>
+    </div>
+
+    <div class="quick-grid">
+      <button class="card quick-card" onclick="showPage('truthdare')">
+        <div class="card-icon glossy-icon">
+          <svg class="icon glossy-vector"><use href="#masks"></use></svg>
+        </div>
+        <div>
+          <div class="card-title">Truth & Dare</div>
+          <div class="card-desc">Spin & play</div>
+        </div>
+      </button>
+
+      <button class="card quick-card" onclick="showPage('people')">
+        <div class="card-icon glossy-icon">
+          <svg class="icon glossy-vector"><use href="#users"></use></svg>
+        </div>
+        <div>
+          <div class="card-title">People</div>
+          <div class="card-desc">Choose who is playing</div>
+        </div>
+      </button>
+
+      <button class="card quick-card" onclick="showPage('truthdare')">
+        <div class="card-icon glossy-icon">
+          <svg class="icon glossy-vector"><use href="#dice"></use></svg>
+        </div>
+        <div>
+          <div class="card-title">Quick Spin</div>
+          <div class="card-desc">Who's next?</div>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section class="section about-section">
+    <div class="about-box card" onclick="showPage('about')">
+      <div class="card-icon glossy-icon">
+        <svg class="icon glossy-vector"><use href="#info"></use></svg>
+      </div>
+      <div class="about-box-copy">
+        <div class="card-title">About Us</div>
+        <div class="card-desc">A little space for friends, fun, Truth & Dare.</div>
+      </div>
+      <svg class="icon about-arrow"><use href="#arrow"></use></svg>
+    </div>
+  </section>
+
+</main>
+
+<!-- ABOUT -->
+<section id="about" class="page">
+  <div class="page-top">
+    <div class="back-row"><button onclick="showPage('home')">‹ Back</button></div>
+    <div class="eyebrow">ABOUT</div>
+    <h2 class="page-heading">About Us</h2>
+    <p class="page-description">Vaista Dare Koro To? is a simple friend-group game made for laughs, quick spins and memorable moments together.</p>
+  </div>
+
+  <div class="card about-card about-page-card">
+    <div class="card-icon glossy-icon">
+      <svg class="icon glossy-vector"><use href="#info"></use></svg>
+    </div>
+    <h3>Friends. Truth. Dare. Chaos.</h3>
+    <p>Pick your people, spin the wheel and let the group decide what happens next.</p>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people" class="page">
+  <div class="page-top">
+    <div class="back-row"><button onclick="showPage('home')">‹ Back</button></div>
+    <div class="eyebrow">PLAYERS</div>
+    <h2 class="page-heading">People</h2>
+    <p class="page-description">Add everyone who is playing. The wheel will choose one of them.</p>
+  </div>
+
+  <div class="card about-card">
+    <div class="add-person">
+      <input id="personInput" type="text" maxlength="24" placeholder="Enter a name">
+      <button onclick="addPerson()">Add</button>
+    </div>
+    <div id="peopleList" class="people-list"></div>
+  </div>
+
+  <div class="section">
+    <button class="spin-btn" onclick="showPage('truthdare')">🎡 Go to Truth & Dare</button>
+  </div>
+</section>
+
+<!-- TRUTH & DARE -->
+<section id="truthdare" class="page">
+  <div class="page-top">
+    <div class="back-row"><button onclick="showPage('home')">‹ Back</button></div>
+  </div>
+
+  <div class="game-hero">
+    <div class="eyebrow">FRIEND GROUP GAME</div>
+    <h2 class="game-title"><span class="vaista-word">Vaista</span> <span class="dare-word">Dare Koro To?</span></h2>
+    <p class="game-sub">চল, আগে দেখি কার পালা! তারপর সত্যি কথা বলবি নাকি একটা মজার ডেয়ার করবি — তুই ঠিক কর।</p>
+  </div>
+
+  <div class="card player-picker">
+    <div id="playerCount" class="player-count">0 players</div>
+    <div class="wheel-wrap">
+      <div class="wheel-pointer"></div>
+      <div id="wheel" class="wheel"></div>
+      <div class="wheel-center"><svg class="icon glossy-vector dice-center"><use href="#dice"></use></svg></div>
+    </div>
+    <button id="spinButton" class="spin-btn" onclick="spinPlayer()">SPIN — WHO'S NEXT?</button>
+
+    <div id="resultCard" class="result-card card">
+      <div class="result-label">YOUR TURN</div>
+      <div id="resultName" class="result-name">—</div>
+      <div class="result-hint">Choose one.</div>
+
+      <div class="choice-grid">
+        <button class="choice-btn truth-btn" onclick="giveChallenge('truth')">সত্যি কথা</button>
+        <button class="choice-btn dare-btn" onclick="giveChallenge('dare')">ডেয়ার</button>
+      </div>
+
+      <div id="challengeCard" class="challenge-card card">
+        <div id="challengeType" class="challenge-type"></div>
+        <div id="challengeText" class="challenge-text"></div>
+      </div>
+
+      <button class="next-btn" onclick="nextRound()">🎡 NEXT ROUND</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-page="home" onclick="showPage('home')">
+    <svg class="icon"><use href="#home"></use></svg><span>Home</span>
+  </button>
+  <button class="nav-btn" data-page="truthdare" onclick="showPage('truthdare')">
+    <svg class="icon glossy-vector"><use href="#masks"></use></svg><span>Truth & Dare</span>
+  </button>
+  <button class="nav-btn" data-page="people" onclick="showPage('people')">
+    <svg class="icon glossy-vector"><use href="#users"></use></svg><span>People</span>
+  </button>
+</nav>
+
+<!-- SVG ICONS -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+
+<symbol id="home" viewBox="0 0 24 24">
+  <path d="M3 10.8 12 3l9 7.8"></path>
+  <path d="M5.5 9.8V21h13V9.8"></path>
+  <path d="M9.5 21v-6h5v6"></path>
+</symbol>
+
+<symbol id="school" viewBox="0 0 24 24">
+  <path d="M3 21h18"></path>
+  <path d="M5 21V9l7-4 7 4v12"></path>
+  <path d="M8 12h1M12 12h1M16 12h1M8 16h1M12 16h1M16 16h1"></path>
+  <path d="M10 21v-3h4v3"></path>
+</symbol>
+
+<symbol id="book" viewBox="0 0 24 24">
+  <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"></path>
+  <path d="M4 5.5V21"></path>
+  <path d="M8 7h8M8 11h8"></path>
+</symbol>
+
+<symbol id="users" viewBox="0 0 24 24">
+  <circle cx="9" cy="8" r="3"></circle>
+  <path d="M3 20c0-3.2 2.4-5 6-5s6 1.8 6 5"></path>
+  <path d="M16 5.5a3 3 0 0 1 0 5.8M18 15c2.1.7 3 2.1 3 5"></path>
+</symbol>
+
+<symbol id="masks" viewBox="0 0 24 24">
+  <path d="M3.5 7.5c2.2-1.7 5.8-1.7 8 0v6.2c-2.2 2-5.8 2-8 0z"></path>
+  <path d="M12.5 7.5c2.2-1.7 5.8-1.7 8 0v6.2c-2.2 2-5.8 2-8 0z"></path>
+  <path d="M6.5 10.5h2M15.5 10.5h2"></path>
+</symbol>
+
+<symbol id="dice" viewBox="0 0 24 24">
+  <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+  <circle cx="8" cy="8" r=".9" fill="currentColor" stroke="none"></circle>
+  <circle cx="16" cy="16" r=".9" fill="currentColor" stroke="none"></circle>
+  <circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"></circle>
+</symbol>
+
+<symbol id="arrow" viewBox="0 0 24 24">
+  <path d="M5 12h13"></path>
+  <path d="m13 6 6 6-6 6"></path>
+</symbol>
+
+<symbol id="calendar" viewBox="0 0 24 24">
+  <rect x="3" y="5" width="18" height="16" rx="3"></rect>
+  <path d="M7 3v4M17 3v4M3 10h18"></path>
+  <path d="M7 14h3M14 14h3M7 18h3"></path>
+</symbol>
+
+<symbol id="image" viewBox="0 0 24 24">
+  <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+  <circle cx="8.5" cy="9" r="1.5"></circle>
+  <path d="m4 18 5-5 3 3 2-2 6 5"></path>
+</symbol>
+
+<symbol id="bell" viewBox="0 0 24 24">
+  <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+  <path d="M10 21h4"></path>
+</symbol>
+
+<symbol id="info" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="9"></circle>
+  <path d="M12 10v6M12 7h.01"></path>
+</symbol>
+
+<symbol id="user" viewBox="0 0 24 24">
+  <circle cx="12" cy="8" r="3.5"></circle>
+  <path d="M5 21c.5-4 2.8-6 7-6s6.5 2 7 6"></path>
+</symbol>
+
+</defs>
+</svg>
+
+
+<script>
+const pages = [...document.querySelectorAll(".page")];
+const navs = [...document.querySelectorAll(".nav-btn")];
+
+function showPage(id){
+  pages.forEach(page => page.classList.toggle("active", page.id === id));
+  navs.forEach(btn => btn.classList.toggle("active", btn.dataset.page === id));
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(id === "people") renderPeople();
+  if(id === "truthdare") renderWheel();
+}
+
+window.addEventListener("keydown", e => {
+  if(e.key === "Escape") showPage("home");
+});
+
+/* =====================================================
+   PEOPLE + TRUTH & DARE
+===================================================== */
+
+const defaultPeople = [];
+let people = JSON.parse(localStorage.getItem("vaistaPlayers") || "null") || defaultPeople;
+let currentPlayer = null;
+let spinning = false;
+let wheelRotation = 0;
+
+const truths = [
+  "এই গ্রুপে প্রথম দেখায় কাকে দেখে মনে হয়েছিল, ‘এই মানুষটা একদম অন্যরকম!’?",
+  "তোর সবচেয়ে অদ্ভুত ক্রাশটা কার ওপর ছিল?",
+  "কাউকে ইমপ্রেস করতে গিয়ে সবচেয়ে হাস্যকর কী করেছিস?",
+  "কোন মেসেজ পাঠিয়ে পরে মনে হয়েছিল, ‘ইশ, এটা কেন পাঠালাম!’?",
+  "তুই কার মেসেজের রিপ্লাই দিতে সবচেয়ে বেশি ভাবিস?",
+  "কাউকে না চিনলেও তার প্রোফাইল অনেকক্ষণ ঘেঁটেছিস কখনো?",
+  "তোর ফোনে এমন কী আছে যেটা বন্ধুরা দেখলে তোকে নিয়ে হাসাহাসি করবে?",
+  "শেষবার কখন এমন কিছুতে হেসেছিস যে থামতেই পারছিলি না?",
+  "ক্লাসে চুপচাপ বসে থেকেও সবচেয়ে বেশি কী কাণ্ড করেছিস?",
+  "স্যার বা ম্যাডামকে দেওয়া তোর সবচেয়ে মজার অজুহাত কোনটা?",
+  "হোমওয়ার্ক না করে ‘হ্যাঁ, করেছি’ বলেছিস কখনো?",
+  "পরীক্ষার আগে পড়ার বদলে সবচেয়ে র‍্যান্ডম কী করেছিস?",
+  "তোর স্কুল/কলেজের সবচেয়ে লজ্জার কিন্তু এখন মজার স্মৃতি কোনটা?",
+  "কোন বন্ধুর সঙ্গে থাকলে তোর হাসি সবচেয়ে বেশি পায়?",
+  "এই গ্রুপে কার সঙ্গে তুই সবচেয়ে বেশি ঝগড়া করিস, আবার কিছুক্ষণ পর ঠিকও হয়ে যাস?",
+  "কাকে দেখে তোর প্রথমে মনে হয়েছিল ‘ওকে তো খুব সিরিয়াস!’ তারপর বুঝেছিস আসলে না?",
+  "তুই কখনো কারও সামনে কুল দেখাতে গিয়ে উল্টো লজ্জায় পড়েছিস?",
+  "কাউকে কিছু বলতে গিয়ে নার্ভাস হয়ে কথাই গুলিয়ে ফেলেছিস কখনো?",
+  "কোন ছোট্ট ব্যাপারটা তোর মুড একদম ভালো করে দেয়?",
+  "তোর সবচেয়ে অদ্ভুত অভ্যাস কী, যেটা বন্ধুরা জানলে বলবে ‘এটা কী!’?",
+  "একা থাকলে এমন কী করিস যা অন্যদের সামনে কখনো করবি না?",
+  "তোর ফোনের সবচেয়ে অদ্ভুত সার্চটা কী?",
+  "ভুল মানুষকে মেসেজ পাঠানোর পর কী হয়েছিল?",
+  "কারও মেসেজ দেখে রিপ্লাই না দিয়ে ইচ্ছে করে পরে দিয়েছিস কখনো?",
+  "তুই কি কখনো কারও অনলাইন স্ট্যাটাস বারবার চেক করেছিস?",
+  "তোর সবচেয়ে বাজে কিন্তু মজার ভুল কোনটা?",
+  "কোন খাবারের কম্বিনেশন তোর কাছে অদ্ভুত হলেও তুই পছন্দ করিস?",
+  "বন্ধুদের মধ্যে কে তোকে সবচেয়ে ভালো বুঝতে পারে?",
+  "তুই মন খারাপ থাকলে প্রথমে কাকে মেসেজ করতে ইচ্ছে করে?",
+  "কোন বন্ধুর কাছ থেকে সবচেয়ে অপ্রত্যাশিত সাহায্য পেয়েছিস?",
+  "এই গ্রুপে কে সবচেয়ে বেশি ‘আমি কিছুই করিনি’ বলে?",
+  "কে সবচেয়ে বেশি দেরি করে রিপ্লাই দেয় বলে মনে হয়?",
+  "কে কোনো সিরিয়াস মুহূর্তেও হেসে ফেলতে পারে?",
+  "কে ভুল করে এমন কিছু বলে ফেলতে পারে যেটা সবাই মনে রাখবে?",
+  "কে রাস্তায় হারিয়ে গেলেও বলবে ‘আমি জানি কোথায় আছি’?",
+  "কে সবচেয়ে বেশি র‍্যান্ডম জিনিস নিয়ে উত্তেজিত হয়?",
+  "কে একটা ছোট গল্পকে আধা ঘণ্টার গল্প বানিয়ে বলতে পারে?",
+  "কে সবচেয়ে বেশি ছবি তুলে শেষে একটা ছবিও পোস্ট করবে না?",
+  "কে ফোন হাতে নিয়েই আবার ফোনটা কোথায় রেখেছে খুঁজবে?",
+  "তোর এমন কোন ট্যালেন্ট আছে যেটা আসলে কোনো কাজেই লাগে না?",
+  "তুই নিজের জন্য একটা মজার ডাকনাম রাখলে কী রাখতিস?",
+  "তোর জীবন নিয়ে সিনেমা হলে তার নাম কী হতো?",
+  "একদিনের জন্য কার জীবনটা দেখে আসতে চাইতিস?",
+  "তোর সবচেয়ে বড় ‘কেন যে এটা করলাম!’ মুহূর্ত কোনটা?",
+  "কোন ব্যাপারে তুই খুব সহজে লজ্জা পেয়ে যাস?",
+  "বন্ধুরা তোকে কোন ব্যাপার নিয়ে সবচেয়ে বেশি টিজ করে?",
+  "তোর এমন কোন ছোট্ট সিক্রেট আছে যেটা শুনলে বন্ধুরা অবাক হবে?",
+  "তুই কখনো কারও কথা ভুল বুঝে পরে নিজের ভুল বুঝেছিস?",
+  "কোন বন্ধুর সঙ্গে একদিনের জন্য জায়গা বদলাতে চাইতিস?",
+  "তোর কাছে বন্ধুত্বে সবচেয়ে গুরুত্বপূর্ণ জিনিসটা কী?",
+  "এই গ্রুপের কোন মুহূর্তটা তুই ভবিষ্যতেও মনে রাখতে চাইবি?"
+];
+
+const dares = [
+  "এখনই ১০ সেকেন্ডের জন্য নিজের সবচেয়ে মজার ড্যান্সটা কর।",
+  "পরের এক মিনিট রোবটের মতো কথা বল।",
+  "কাছের কোনো জিনিসকে ধরে এমনভাবে বিজ্ঞাপন বানিয়ে বল যেন এটা দুনিয়ার সবচেয়ে দামি জিনিস।",
+  "একজন বন্ধুর হাঁটার স্টাইল নকল কর — কিন্তু সম্মান রেখেই।",
+  "১০ সেকেন্ডে নিজের সবচেয়ে মজার মুখভঙ্গি বানিয়ে রাখ।",
+  "একটা গান গাও, কিন্তু মিউজিক ছাড়া।",
+  "পরের ৩০ সেকেন্ড স্পোর্টস কমেন্টেটরের মতো কথা বল।",
+  "নিজের জন্য একটা একদম আজব সুপারহিরো নাম বানিয়ে সবাইকে বল।",
+  "তুই এখন একটা ফেক নিউজ রিপোর্টার — ঘরের যা দেখছিস সেটা নিয়ে ব্রেকিং নিউজ দে।",
+  "একটা কাল্পনিক সিনেমার ট্রেলার ২০ সেকেন্ডে অভিনয় করে দেখ।",
+  "তোর পাশের জিনিসটা নিয়ে ৩ লাইনের একটা মজার কবিতা বানিয়ে বল।",
+  "পরের ৩০ সেকেন্ড শুধু প্রশ্ন করে কথা বল।",
+  "একজন গেম-শো হোস্টের মতো সবাইকে পরিচয় করিয়ে দে।",
+  "নিজের সবচেয়ে নাটকীয় ‘আমি জিতে গেছি’ বক্তৃতা দে — যদিও কিছুই জিতিসনি।",
+  "একটা নতুন শব্দ বানিয়ে তার মানে সবাইকে বোঝা।",
+  "কোনো একটা সাধারণ কাজকে এমনভাবে অভিনয় কর যেন সেটা অলিম্পিকের ফাইনাল।",
+  "এক মিনিটের জন্য খুব সিরিয়াস নিউজ অ্যাঙ্করের গলায় কথা বল।",
+  "একজন বন্ধুকে নিয়ে একটা মজার কিন্তু ভালো কমপ্লিমেন্ট দে।",
+  "একটা কাল্পনিক রেস্টুরেন্টের সবচেয়ে আজব মেনু বানিয়ে বল।",
+  "১০ সেকেন্ড স্লো-মোশন সিনেমার মতো হাঁট।",
+  "নিজের নাম দিয়ে একটা ৫ সেকেন্ডের জিঙ্গেল বানিয়ে গা।",
+  "কাছের কোনো জিনিসকে নতুন একটা মজার নাম দে এবং সবাইকে সেটা দিয়ে ডাক।",
+  "একটা কাল্পনিক আবহাওয়ার খবর দে, যেন আজকের আবহাওয়া একদম পাগলাটে।",
+  "তুই এখন একজন সেলিব্রিটি — ২০ সেকেন্ডের ফেক ইন্টারভিউ দে।",
+  "একটা প্রাণীর মতো অভিনয় কর, বাকিরা আন্দাজ করুক কোনটা।",
+  "পরের ২০ সেকেন্ডে যত বেশি মজার পোজ পারিস দে।",
+  "একটা কাল্পনিক অ্যাপের বিজ্ঞাপন ১৫ সেকেন্ডে বানিয়ে বল।",
+  "নিজের ‘আজকের দিনটা এত অদ্ভুত কেন’ — এই বিষয়ে ২০ সেকেন্ডের বক্তৃতা দে।",
+  "একটা সাধারণ চেয়ারকে এমনভাবে পরিচয় করিয়ে দে যেন এটা তোর বেস্ট ফ্রেন্ড।",
+  "এক মিনিটের জন্য খুব ভদ্রভাবে কথা বল, যেন তুই রাজদরবারে আছিস।",
+  "একজন বন্ধুর একটা harmless catchphrase নকল কর।",
+  "নিজের জন্য একটা নতুন ফানি nickname বেছে নে এবং পরের রাউন্ডে সেটা ব্যবহার কর।",
+  "একটা কাল্পনিক টিভি শো-এর হোস্ট হয়ে ২০ সেকেন্ড চালিয়ে যা।",
+  "একটা ‘আজ আমি খুব গুরুত্বপূর্ণ’ টাইপের নাটকীয় এন্ট্রি দে।",
+  "তুই এখন GPS — কাছের কোনো জায়গায় যাওয়ার অদ্ভুত দিকনির্দেশ দে।",
+  "একটা কাল্পনিক পুরস্কার জিতে ১৫ সেকেন্ডের acceptance speech দে।",
+  "একটা সাধারণ খাবারকে পাঁচ তারকা রেস্টুরেন্টের খাবার হিসেবে রিভিউ কর।",
+  "পরের ৩০ সেকেন্ডে প্রতিটা কথার শেষে ‘স্যার’ বা ‘ম্যাডাম’ বল।",
+  "একটা কাল্পনিক স্পোর্টস ম্যাচের শেষ ১০ সেকেন্ডের ধারাভাষ্য দে।",
+  "একটা মজার মুভির নাম বানিয়ে তার গল্প এক লাইনে বল।"
+];
+
+function savePeople(){
+  localStorage.setItem("vaistaPlayers", JSON.stringify(people));
+}
+
+function renderPeople(){
+  const list = document.getElementById("peopleList");
+  if(!list) return;
+  if(!people.length){
+    list.innerHTML = '<div class="empty-people">No players yet.<br>Add the names of everyone playing.</div>';
+    return;
+  }
+  list.innerHTML = people.map((name,i) => `
+    <div class="card person-row">
+      <div class="person-avatar">${escapeHtml(name.charAt(0).toUpperCase())}</div>
+      <div class="person-name">${escapeHtml(name)}</div>
+      <button class="remove-person" onclick="removePerson(${i})" aria-label="Remove ${escapeHtml(name)}">×</button>
+    </div>
+  `).join("");
+}
+
+function addPerson(){
+  const input = document.getElementById("personInput");
+  const name = input.value.trim();
+  if(!name) return;
+  if(people.some(p => p.toLowerCase() === name.toLowerCase())){
+    input.value = "";
+    return;
+  }
+  people.push(name);
+  savePeople();
+  input.value = "";
+  renderPeople();
+  renderWheel();
+}
+
+function removePerson(index){
+  people.splice(index,1);
+  savePeople();
+  if(currentPlayer && !people.includes(currentPlayer)) currentPlayer = null;
+  renderPeople();
+  renderWheel();
+}
+
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#039;"
+  }[ch]));
+}
+
+function renderWheel(){
+  const wheel = document.getElementById("wheel");
+  const count = document.getElementById("playerCount");
+  if(!wheel || !count) return;
+
+  count.textContent = `${people.length} player${people.length === 1 ? "" : "s"}`;
+
+  wheel.querySelectorAll(".wheel-name").forEach(e => e.remove());
+
+  if(!people.length){
+    wheel.style.background = "radial-gradient(circle,#17131c,#09090c)";
+    return;
+  }
+
+  const step = 360 / people.length;
+  people.forEach((name,i) => {
+    const el = document.createElement("div");
+    el.className = "wheel-name";
+    el.textContent = name;
+    el.style.transform = `rotate(${i*step}deg) translateY(-${Math.min(105, Math.max(72, 34 + people.length*6))}px) rotate(${-i*step}deg)`;
+    wheel.appendChild(el);
+  });
+}
+
+function spinPlayer(){
+  if(spinning || people.length < 2){
+    if(people.length < 2) alert("Add at least 2 players first.");
+    return;
+  }
+
+  spinning = true;
+  const btn = document.getElementById("spinButton");
+  const result = document.getElementById("resultCard");
+  const challenge = document.getElementById("challengeCard");
+
+  btn.disabled = true;
+  result.classList.remove("show");
+  challenge.classList.remove("show");
+
+  const index = Math.floor(Math.random() * people.length);
+  currentPlayer = people[index];
+
+  const segmentCenter = index * (360 / people.length) + (180 / people.length);
+  const target = 360 - segmentCenter;
+  const extra = 360 * (5 + Math.floor(Math.random()*3));
+  wheelRotation += extra + target - (wheelRotation % 360);
+  document.getElementById("wheel").style.transform = `rotate(${wheelRotation}deg)`;
+
+  setTimeout(() => {
+    document.getElementById("resultName").textContent = currentPlayer;
+    result.classList.add("show");
+    spinning = false;
+    btn.disabled = false;
+  }, 4400);
+}
+
+function giveChallenge(type){
+  if(!currentPlayer) return;
+
+  const pool = type === "truth" ? truths : dares;
+  const challenge = pool[Math.floor(Math.random() * pool.length)];
+
+  document.getElementById("challengeType").textContent =
+    type === "truth" ? "সত্যি কথা" : "ডেয়ার";
+  const challengeEl = document.getElementById("challengeText");
+  if(type === "truth"){
+    challengeEl.classList.add("bangla-question");
+    challengeEl.innerHTML = escapeHtml(challenge).replace(/\[\[(.*?)\]\]/g, '<span class="challenge-keyword">$1</span>');
+  }else{
+    challengeEl.classList.remove("bangla-question");
+    challengeEl.textContent = challenge;
+  }
+  document.getElementById("challengeCard").classList.add("show");
+}
+
+function nextRound(){
+  currentPlayer = null;
+  document.getElementById("resultCard").classList.remove("show");
+  document.getElementById("challengeCard").classList.remove("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+const personInput = document.getElementById("personInput");
+if(personInput){
+  personInput.addEventListener("keydown", e => {
+    if(e.key === "Enter") addPerson();
+  });
+}
+
+renderPeople();
+renderWheel();
+</script>
+
+</body>
+</html>
